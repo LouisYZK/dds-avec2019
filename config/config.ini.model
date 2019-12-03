@@ -1,0 +1,6 @@
+[training]
+trainable = True
+
+[data]
+data_dir = /data
+
