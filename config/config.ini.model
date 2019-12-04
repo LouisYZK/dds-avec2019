@@ -2,5 +2,14 @@
 trainable = True
 
 [data]
-data_dir = /data
+data_dir = /home/yzk/depression/data/
+
+[feature_table]
+tbl_exp01 = feature_exp01
+
+[database]
+db_path = /home/yzk/data/avec.db
+tbl_training_set = train
+tbl_develop_set = develop
+tbl_test_set = test
 
