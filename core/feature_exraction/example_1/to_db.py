@@ -16,15 +16,15 @@ logger = log_handler.get_logger()
 
 def data_set():
     engine = create_engine(f'sqlite:///{config.db_path}')
-    df_train = pd.read_csv(config.data_dir + global_values.TRAIN_SET_NAME)
-    df_dev = pd.read_csv(config.data_dir + global_values.DEL_SET_NAME)
+    df_train = pd.read_csv(config.data_dir + global_values.TRAIN_SET_NAME, header=0)
+    df_dev = pd.read_csv(config.data_dir + global_values.DEL_SET_NAME, header=0)
     
     logger.debug(df_dev.head())
     sql_handler = SqlHandler()
     sql_handler.execute(f'drop table {config.tbl_develop_set}')
     sql_handler.execute(f'drop table {config.tbl_training_set}')
-    df_train.to_sql(config.tbl_training_set, engine)
-    df_dev.to_sql(config.tbl_develop_set, engine)
+    df_train.to_sql(config.tbl_training_set, engine, index=False)
+    df_dev.to_sql(config.tbl_develop_set, engine, index=False)
 
 
 if __name__ == '__main__':
