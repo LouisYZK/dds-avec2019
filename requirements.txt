@@ -1,1 +1,5 @@
 sqlalchemy
+numpy
+pandas
+matplotlib
+librosa

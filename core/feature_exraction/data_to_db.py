@@ -4,6 +4,9 @@ Detect depression from communication: how computer vision, signal processing, an
 analysis join forces
 Aven Samareh, Yan Jin, Zhangyang Wang, Xiangyu Chang & Shuai Huang
 """
+"""extract origin training set data or feature data into sqlite db;
+"""
+
 import pandas as pd
 from sqlalchemy import create_engine, MetaData
 import config
@@ -25,6 +28,7 @@ def data_set():
     sql_handler.execute(f'drop table {config.tbl_training_set}')
     df_train.to_sql(config.tbl_training_set, engine, index=False)
     df_dev.to_sql(config.tbl_develop_set, engine, index=False)
+
 
 
 if __name__ == '__main__':

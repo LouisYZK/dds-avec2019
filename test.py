@@ -1,6 +1,7 @@
 import sys
 import config
-from core.feature_exraction.example_1.to_db import data_set
+import librosa
+from core.feature_exraction.data_to_db import data_set
 import common.log_handler as log_handler
 config.init()
 
