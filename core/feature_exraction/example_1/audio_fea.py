@@ -39,5 +39,3 @@ It is the gradient of the linear regression of a spectrum. 1
 Spectral autocorrelation ||
 It is a function that measures the regular harmonic spacing in the spectrum of the speech signal. 1
 """
-
-

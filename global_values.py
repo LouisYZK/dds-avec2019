@@ -1,3 +1,5 @@
+import config
+import os
 BASE_DIR = '/home/yzk/dds-avec2019/'
 
 TRAIN_SET_NAME = 'train_split_Depression_AVEC2017.csv'
@@ -32,3 +34,19 @@ Rd_conf -  a confidence value between 0 (lowest confidence) to 1 (best confidenc
 HM PDD - Phase Distortion 导数
 HM PDM - Phase Distortion Mean
 """
+
+PREFIX = [folder[:-1] for folder in os.listdir(config.data_dir + '/avec') \
+                                  if folder.endswith('P')]
+
+SUFFIX = {
+    'wav': 'AUDIO.wav',
+    'face_3d': 'CLNF_features3D.txt',
+    'face_2d': 'CLNF_features.txt',
+    'gaze': 'CLNF_gaze.txt',
+    'pose': 'CLNF_pose.txt',
+    'formant': 'FORMANT.csv',
+    'text': 'TRANSCRIPT.csv',
+    'au': 'CLNF_AUs.txt',
+    'hog': 'CLNF_hog.bin',
+    'covarep': 'COVAREP.csv'
+}
