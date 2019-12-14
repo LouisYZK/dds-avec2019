@@ -4,7 +4,7 @@ merge two dataframe according to ID to generate training and dev set;
 from common.sql_handler import SqlHandler
 import config
 
-def gen_df_set(feature_table, gender=False):
+def get_data_by_id(feature_table, gender=False):
 
     sql_handler = SqlHandler()
     feature = sql_handler.get_df(feature_table)

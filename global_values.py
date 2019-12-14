@@ -55,7 +55,10 @@ SUFFIX = {
 FORMANT_COLUMNS = ['formant_0', 'formant_1', 'formant_2', 'formant_3', 'formant_4']
 
 
-# model's name 
-MODEL_EXP_1 = 'exp1'
-MODEL_EXP_2 = 'exp2'
-MODEL_BL = 'baseline'
+# feature's name 
+FEATURE_EXP_1 = 'exp1'
+FEATURE_EXP_2 = 'exp2'
+FEATURE_BL = 'baseline'
+
+# model's name
+MODEL_RF = 'rf'

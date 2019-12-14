@@ -5,7 +5,7 @@ class FeatureExtration():
         self.model = model
 
     def gen_fea(self):
-        if self.model == MODEL_EXP_2:
+        if self.model == FEATURE_EXP_2:
             from core.feature_exraction.example_2 import gen_feature
             gen_feature.gen_fea()
         else:

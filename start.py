@@ -11,12 +11,12 @@ from core.feature_exraction import extract
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('--mode', help='feature extraction or training')
-parser.add_argument('--model', help='choose which model')
+parser.add_argument('--feature', help='choose which feature to extract or train')
 
 args = parser.parse_args()
 
-if args.mode == 'feature':
-    fea_ext = extract.FeatureExtration(model=args.model)
+if args.mode == 'extract':
+    fea_ext = extract.FeatureExtration(model=args.feature)
     fea_ext.gen_fea()
 else:
     logger.info('training model not finished yet!')
