@@ -12,4 +12,5 @@ db_path = /home/yzk/data/avec.db
 tbl_training_set = train
 tbl_develop_set = develop
 tbl_test_set = test
+tbl_exp2_audio_fea = exp2_audio_fea
 

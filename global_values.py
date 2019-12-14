@@ -1,16 +1,16 @@
-import config
 import os
+import config
 BASE_DIR = '/home/yzk/dds-avec2019/'
 
 TRAIN_SET_NAME = 'train_split_Depression_AVEC2017.csv'
 DEL_SET_NAME = 'dev_split_Depression_AVEC2017.csv'
 
 # COVAREP's clomuns
-COVAREP_COLUMN = ['F0', 'VUV', 'NAQ', 'QOQ', 'H1H2', 'HRF', 'PSP', 'MDQ', 'peakSlope',
+COVAREP_COLUMNS = ['F0', 'VUV', 'NAQ', 'QOQ', 'H1H2', 'HRF', 'PSP', 'MDQ', 'peakSlope',
 'Rd', 'Rd_conf']
-for i in range(25): COVAREP_COLUMN.append('MCEP_' + str(i))
-for i in range(25): COVAREP_COLUMN.append('HMPDM_' + str(i))
-for i in range(13): COVAREP_COLUMN.append('HMPDD_' + str(i))
+for i in range(25): COVAREP_COLUMNS.append('MCEP_' + str(i))
+for i in range(25): COVAREP_COLUMNS.append('HMPDM_' + str(i))
+for i in range(13): COVAREP_COLUMNS.append('HMPDD_' + str(i))
 
 """
 F0 - Fundamental Frequnency; 原始的声带振动频率，决定了声音的初始音高；一般是在语谱图中最低的共振峰；
@@ -50,3 +50,12 @@ SUFFIX = {
     'hog': 'CLNF_hog.bin',
     'covarep': 'COVAREP.csv'
 }
+
+# formant.csv columns
+FORMANT_COLUMNS = ['formant_0', 'formant_1', 'formant_2', 'formant_3', 'formant_4']
+
+
+# model's name 
+MODEL_EXP_1 = 'exp1'
+MODEL_EXP_2 = 'exp2'
+MODEL_BL = 'baseline'
