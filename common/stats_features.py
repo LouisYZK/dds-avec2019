@@ -8,7 +8,7 @@ import numpy as np
 class StatsFea():
     def __init__(self):
         self.columns = ['mean', 'std', 'skew', 'kurtosis',
-                        'sqrt', 'peak-rms', 'iqr', 'spectral']
+                        'peak-rms', 'iqr', 'spectral']
     def gen_fea(self, data):
         """Assume data is a one-dimentional vector
         """
@@ -21,3 +21,5 @@ class StatsFea():
         stats_fea.append(scipy.stats.iqr(data)) # interquantile range)
         stats_fea.append(scipy.stats.gmean(data)/np.mean(data)) # spectral)
         return stats_fea
+
+
