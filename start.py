@@ -13,6 +13,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--mode', help='feature extraction or training')
 parser.add_argument('--feature', help='choose which feature to extract or train')
 parser.add_argument('--model', help='choose which predictor to train')
+parser.add_argument('--gender', help='wether consider gender or not')
 
 args = parser.parse_args()
 
@@ -25,7 +26,10 @@ elif args.mode == 'train':
     model = args.model
     logger.info(f'You are training using model {model} via feature {fea}')
     training = Train(model_name=model, feature_name=fea)
-    training.run()
+    training.start()
+    if args.gender == 'y':
+        logger.info(f'You are training using model {model} via feature {fea} and consider gender!')
+        Train(model_name=model, feature_name=fea, gender=True).start()
     
 else:
     logger.info('training model not finished yet!')

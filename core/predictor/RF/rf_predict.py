@@ -47,13 +47,12 @@ class RfPredictor(Predictor):
         X = self.dev_set.loc[:, 'F0_mean':].values
         y = self.dev_set['PHQ8_Score'].values
         scores = cross_val_score(self.rf, X, y, cv=10, scoring='neg_mean_absolute_error') 
-        logger.info(f'final result: (MAE) {abs(scores.mean())}')
+        mae = abs(scores.mean())
 
         scores = cross_val_score(self.rf, X, y, cv=10, scoring='neg_mean_squared_error') 
-        logger.info(f'final result: (RMSE) {math.sqrt(abs(scores.mean()))}')
+        rmse = math.sqrt(abs(scores.mean()))
 
         y_pred = self.predict(X)
-        print(y_pred)
-        print(y)
         ccc = ccc_score(y, y_pred)
-        logger.info(f'final result: (CCC) {ccc}')
+        
+        return {'MAE': mae, 'RMSE': rmse, 'CCC':ccc}
