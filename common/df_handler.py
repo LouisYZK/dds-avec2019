@@ -1,6 +1,8 @@
 """
 merge two dataframe according to ID to generate training and dev set;
 """
+
+import pandas as pd
 from common.sql_handler import SqlHandler
 import config
 

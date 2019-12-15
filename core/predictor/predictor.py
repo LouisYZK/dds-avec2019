@@ -24,5 +24,5 @@ class Predictor(object):
         pass
 
     @abstractmethod
-    def metric(self):
+    def eval(self):
         pass    
