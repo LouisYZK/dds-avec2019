@@ -14,6 +14,7 @@ from sklearn import metrics
 
 from core.predictor.predictor import Predictor
 from common.sql_handler import SqlHandler
+from common.metric import ccc_score
 import config
 from global_values import *
 from common.log_handler import get_logger
@@ -50,3 +51,9 @@ class RfPredictor(Predictor):
 
         scores = cross_val_score(self.rf, X, y, cv=10, scoring='neg_mean_squared_error') 
         logger.info(f'final result: (RMSE) {math.sqrt(abs(scores.mean()))}')
+
+        y_pred = self.predict(X)
+        print(y_pred)
+        print(y)
+        ccc = ccc_score(y, y_pred)
+        logger.info(f'final result: (CCC) {ccc}')
