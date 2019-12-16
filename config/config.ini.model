@@ -13,4 +13,6 @@ tbl_training_set = train
 tbl_develop_set = develop
 tbl_test_set = test
 tbl_exp2_audio_fea = exp2_audio_fea
+tbl_exp1_head_fea = exp1_head_fea
+tbl_exp1_face_fea = exp1_face_fea
 
