@@ -114,3 +114,5 @@ class VideoFea(object):
     def to_db(self, data_frame, table):
         sql_handler = SqlHandler()
         sql_handler.df_to_db(data_frame, table)
+
+
