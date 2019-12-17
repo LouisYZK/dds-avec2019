@@ -53,7 +53,10 @@ SUFFIX = {
 
 # formant.csv columns
 FORMANT_COLUMNS = ['formant_0', 'formant_1', 'formant_2', 'formant_3', 'formant_4']
-
+# column name of video
+POSE_COLUMNS = ['Tx', 'Ty',	'Tz', 'Rx', 'Ry', 'Rz']
+EXP1_FACE_COLUMNS = ['right_eye_h', 'left_eye_h', 'left_eye_v', 'right_eye_v',
+                'mouth_v', 'mouth_h', 'eyebrow_h', 'eyebrow_v']
 
 # feature's name 
 FEATURE_EXP_1 = 'exp1'

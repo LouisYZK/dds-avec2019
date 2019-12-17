@@ -46,6 +46,10 @@ class SqlHandler:
         return
 
     def df_to_db(self, data_frame, table):
+        try:
+            self.execute(f'drop table {table};')
+        except:
+            pass
         data_frame.to_sql(table, self.engine, index=False)
         logger.info('stored into ' + table)
 

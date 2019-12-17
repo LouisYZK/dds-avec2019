@@ -3,8 +3,8 @@ Detect Depression Sub-challenge of AVEC2019
 
 Giving that I need many different type experiments, I made a relatively dispert framework
 
-### 结构
-## feature_extraction
+## 结构
+### feature_extraction
 
 Different features' extraction according to each model;
 
@@ -29,13 +29,15 @@ Models (Unimodal or Multi-modal fusion)
 ## 使用
 此版本基于`python3.7` 如果期望使用以下版本运行只需修改全部的`f-string`即可；
 
+
 安装需求库
 ```
 pip install -r requirements.txt
 ```
 
-运行实验，输入可选参数
+根据你的环境， 修改`config.ini.model`文件的全部 和 `global_values.py`的部分参数，当然扩展模型时也可以加入新的参数；
 
+运行实验，输入可选参数
 ```
 python start.py --mode [train|extract] --model [MODEL_NAME] --feature [FEATURE_NAME]
 ```
@@ -46,6 +48,23 @@ python start.py --mode [train|extract] --model [MODEL_NAME] --feature [FEATURE_N
 - `feature` 选择以哪种特征训练
 
 以上列表均支持传入列表，支持同时训练，结果都会打印在日志中；
+
+- 特征提取
+
+本框架同意采用sqlite存储特征文件，根据不同模型的特征需求、提取方法不同，需要先进行提取入库；
+
+例如：
+提取exp1模型的特征，*(暂未实现按模态提取，未来可以考虑加入）*
+```bash
+ python3 start.py  --mode extract --feature exp1 
+```
+
+- 预测实验
+在实验之前你可能需要把实验的数据集（训练集和测试集）也做入库处理，保持前后的统一：
+```
+python core/feature_extraction/data_to_db.py
+```
+
 
 示例：
 ```
