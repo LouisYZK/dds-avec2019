@@ -69,4 +69,20 @@ class RfPredictor(Predictor):
         return {'MAE': mae, 'RMSE': rmse, 'CCC':ccc, 'feature_importaces': top_fea}
 
 class MultiModalRandomForest(Predictor):
-    pass
+    def __init__(self,
+                 audio_data=None,
+                 audio_fea=None,
+                 video_data=None,
+                 video_fea=None,
+                 text_data=None,
+                 text_fea=None):
+        pass
+
+    def train(self):
+        pass
+
+    def predict(self):
+        pass
+
+    def eval(self):
+        pass
