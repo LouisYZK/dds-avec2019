@@ -25,11 +25,16 @@ def pre_data(df):
     df[np.isinf(df)] = 0.0
     return df
 
-
 class RfPredictor(Predictor):
-    def __init__(self, train, dev):
+    def __init__(self, train, dev, features=None):
+        """
+        Input:
+            train and dev are ndarray-like data
+            features are the freature name in tran and dev
+        """
         self.train_set = pre_data(train)
         self.dev_set = pre_data(dev)
+        self.feature_list = features
 
     def train(self):
         self.rf = RandomForestRegressor(n_estimators=100,
@@ -38,6 +43,7 @@ class RfPredictor(Predictor):
         X = self.train_set.loc[:, 'F0_mean':].values
         y = self.train_set['PHQ8_Score'].values.ravel()
         self.rf.fit(X, y)
+        
 
     def predict(self, X):
         y = self.rf.predict(X)
@@ -55,4 +61,12 @@ class RfPredictor(Predictor):
         y_pred = self.predict(X)
         ccc = ccc_score(y, y_pred)
         
-        return {'MAE': mae, 'RMSE': rmse, 'CCC':ccc}
+        fea_importance = self.rf.feature_importances_
+        fea_imp_dct = {fea:val for fea, val in zip(self.feature_list, fea_importance)}
+        top = sorted(fea_imp_dct, key=lambda x: fea_imp_dct[x], reverse=True)[:5]
+        top_fea = {fea: fea_imp_dct[fea] for fea in top}
+        
+        return {'MAE': mae, 'RMSE': rmse, 'CCC':ccc, 'feature_importaces': top_fea}
+
+class MultiModalRandomForest(Predictor):
+    pass

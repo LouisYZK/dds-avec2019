@@ -55,3 +55,7 @@ class SqlHandler:
 
     def get_df(self, table):
         return pd.read_sql(table, self.engine)
+
+    def get_cloumns_from_table(self, table):
+        df = pd.read_sql(f'select * from {table} limit 1', self.engine)
+        return list(df.columns.values)
