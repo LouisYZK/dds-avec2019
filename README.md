@@ -4,6 +4,8 @@ Detect Depression Sub-challenge of AVEC2019
 Giving that I need many different type experiments, I made a relatively dispert framework
 
 ## 结构
+![结构图](img/structure.png)
+
 ### feature_extraction
 
 Different features' extraction according to each model;
