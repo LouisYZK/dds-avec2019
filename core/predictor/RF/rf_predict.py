@@ -76,7 +76,9 @@ class MultiModalRandomForest(Predictor):
                  video_fea=None,
                  text_data=None,
                  text_fea=None):
-        pass
+        self.audio_data, self.audio_fea = audio_data, audio_fea
+        self.video_data, self.video_fea = video_data, video_fea
+        self.text_data, self.text_fea = text_data, text_fea
 
     def train(self):
         pass
