@@ -80,7 +80,11 @@ class Train(Process):
                     logger.info(f'Evalutaion Scores Female {self.model_name} with {self.feature_name}: {score}')
             else:
                 if not self.gender:
-                                        
+                    # multi_modality
+                    from core.predictor.RF.rf_predict import MultiModalRandomForest
+                    mmrf = MultiModalRandomForest(self.audio_data, self.audio_fea,
+                                                  self.video_data, self.video_fea,
+                                                  self.text_data, self.text_fea)
                     
         else:
             print('not finish yet!')

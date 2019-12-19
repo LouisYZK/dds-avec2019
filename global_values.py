@@ -65,3 +65,15 @@ FEATURE_BL = 'baseline'
 
 # model's name
 MODEL_RF = 'rf'
+
+
+AUDIO_TABLE = set([
+    config.tbl_exp2_audio_fea
+])
+
+VIDEO_TABLE = set([
+    config.tbl_exp1_face_fea,
+    config.tbl_exp1_head_fea
+])
+
+TEXT_TABLE = set([])

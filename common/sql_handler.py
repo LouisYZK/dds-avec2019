@@ -4,6 +4,7 @@ import pandas as pd
 from sqlalchemy import create_engine, MetaData
 from common.log_handler import get_logger
 import config
+from global_values import *
 config.init()
 
 logger = get_logger()
@@ -57,5 +58,20 @@ class SqlHandler:
         return pd.read_sql(table, self.engine)
 
     def get_cloumns_from_table(self, table):
-        df = pd.read_sql(f'select * from {table} limit 1', self.engine)
-        return list(df.columns.values)
+        if type(table) == str:
+            df = pd.read_sql(f'select * from {table} limit 1', self.engine)
+            return list(df.columns.values)
+        else:
+            audio_fea, video_fea, text_fea = [], [], []
+            for tb in table:
+                df = pd.read_sql(f'select * from {table} limit 1', self.engine)
+                cols = df.columns.values
+                if tb in AUDIO_TABLE:
+                    audio_fea += cols
+                elif tb in VIDEO_TABLE:
+                    video_fea += cols
+                elif tb in TEXT_TABLE:
+                    text_fea += cols
+                else:
+                    raise ValueError
+            
