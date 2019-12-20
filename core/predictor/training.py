@@ -50,8 +50,7 @@ class Train(Process):
                 print('not finished yet')
         elif self.feature_tables is not None:
             # Now you r using a multi-modality model!
-            self.audio_data, self.video_data, self.text_data = \
-                        get_data_multi_modality(self.feature_tables)
+            self.data = get_data_multi_modality(self.feature_tables, self.gender)
             self.audio_fea, self.video_fea, self.text_fea = \
                         self.sql_handler.get_cloumns_from_table(self.feature_tables)
         else:
@@ -82,9 +81,7 @@ class Train(Process):
                 if not self.gender:
                     # multi_modality
                     from core.predictor.RF.rf_predict import MultiModalRandomForest
-                    mmrf = MultiModalRandomForest(self.audio_data, self.audio_fea,
-                                                  self.video_data, self.video_fea,
-                                                  self.text_data, self.text_fea)
+                    mmrf = MultiModalRandomForest(self.data)
                     
         else:
             print('not finish yet!')
