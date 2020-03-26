@@ -6,18 +6,28 @@ Giving that I need many different type experiments, I made a relatively dispert 
 ## 结构
 ![结构图](img/structure.png)
 
-### feature_extraction
+## feature_extraction
 
 Different features' extraction according to each model;
 
-- example_1: from [paper]()
+| modality | type | feature name | table name |
+|  --- | --- | --- | --- |
+| Audio | LLD | mfcc | mfcc |
+| Audio | LLD | egeMaps | egemaps |
+| Audio | BagofWords | BoAW_mfcc | boaw_mfcc |
+| Audio | Deep | audio_densenet | audio_densenet |
+| Audio | Deep | audio_vgg | audo_vgg |
+| Video | LLD | Pose_Gaze_FAUs | pose_gaze_faus |
+| Video | BagofWords | BoVW_Pose_Gaze_FAUs | bovw_pose_gaze_faus |
+| Video | Deep | CNN_Resnet | cnn_resnet |
+| Video | Deep | CNN_VGG | cnn_vgg |
+| Audio | Compound | covarep | *exp2_audio_fea* |
+| Video | Compound | face_feature | *exp1_face_fea* |
+| Video | Compound | head_feature | *exp1_head_fea* |
 
-- example_2: Audio Only, 简单使用COVAREP各项的统计特征。
+Note: The *Compund* type feature are mainly reffered to the paper [1]. LLD, Deep and BoAW/BoVW are mainly reffered to the AVEC-2019 Baselines.
 
-- baseline19: from [AVEC2019]()
-
-
-### predictor
+## predictor
 
 Models (Unimodal or Multi-modal fusion)
 
@@ -92,3 +102,6 @@ python3 start.py --mode train --model rf --feature exp2
 - 更多的训练模型和特征模型
 
 - 深度模型加入后框架的调整
+
+## Reference
+[1] Samareh, A., Jin, Y., Wang, Z., Chang, X., & Huang, S. (2018). Detect depression from communication: how computer vision, signal processing, and sentiment analysis join forces. IISE Transactions on Healthcare Systems Engineering, 8(3), 196–208. http://doi.org/10.1080/24725579.2018.1496494
