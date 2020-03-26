@@ -37,6 +37,7 @@ HM PDM - Phase Distortion Mean
 
 PREFIX = [folder[:-1] for folder in os.listdir(config.data_dir + '/avec') \
                                   if folder.endswith('P')]
+IDS = [item[:3] for item in PREFIX]
 
 SUFFIX = {
     'wav': 'AUDIO.wav',

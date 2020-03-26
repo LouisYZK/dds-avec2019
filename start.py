@@ -20,7 +20,8 @@ parser.add_argument('--gender', help='wether consider gender or not')
 args = parser.parse_args()
 
 if args.mode == 'extract':
-    fea_ext = extract.FeatureExtration(model=args.feature)
+    # fea_ext = extract.FeatureExtration(model=args.feature)
+    fea_ext = extract.FeatureExtration(feature_name=args.feature)
     fea_ext.gen_fea()
 
 elif args.mode == 'train':

@@ -3,6 +3,7 @@ trainable = True
 
 [data]
 data_dir = /home/yzk/depression/data/
+sample_dir = /home/yzk/depression/data/avec
 
 [feature_table]
 tbl_exp01 = feature_exp01
@@ -15,4 +16,18 @@ tbl_test_set = test
 tbl_exp2_audio_fea = exp2_audio_fea
 tbl_exp1_head_fea = exp1_head_fea
 tbl_exp1_face_fea = exp1_face_fea
+tbl_mfcc = mfcc
+tbl_egemaps = egemaps
+tbl_boaw_mfcc = boaw_mfcc
+tbl_boaw_egemaps = boaw_egemaps
+tbl_audio_densenet = audio_densenet
+tbl_audio_vgg = audio_vgg
+tbl_pose_gaze_faus = pose_gaze_faus
+tbl_bovw_pose_gaze_faus = bovw_pose_gaze_faus
+tbl_cnn_resnet = cnn_resnet
+tbl_cnn_vgg = cnn_vgg
 
+
+[opensmile]
+exe_opensmile = /home/yzk/opensmile-2.3.0/bin/linux_x64_standalone_static/SMILExtract
+path_config = /home/yzk/opensmile-2.3.0/config

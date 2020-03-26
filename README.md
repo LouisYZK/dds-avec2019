@@ -10,20 +10,21 @@ Giving that I need many different type experiments, I made a relatively dispert 
 
 Different features' extraction according to each model;
 
-| modality | type | feature name | table name |
-|  --- | --- | --- | --- |
-| Audio | LLD | mfcc | mfcc |
-| Audio | LLD | egeMaps | egemaps |
-| Audio | BagofWords | BoAW_mfcc | boaw_mfcc |
-| Audio | Deep | audio_densenet | audio_densenet |
-| Audio | Deep | audio_vgg | audo_vgg |
-| Video | LLD | Pose_Gaze_FAUs | pose_gaze_faus |
-| Video | BagofWords | BoVW_Pose_Gaze_FAUs | bovw_pose_gaze_faus |
-| Video | Deep | CNN_Resnet | cnn_resnet |
-| Video | Deep | CNN_VGG | cnn_vgg |
-| Audio | Compound | covarep | *exp2_audio_fea* |
-| Video | Compound | face_feature | *exp1_face_fea* |
-| Video | Compound | head_feature | *exp1_head_fea* |
+| modality | type | feature name | table name | Tools|
+|  --- | --- | --- | --- | --- |
+| Audio | LLD | mfcc | mfcc | OpenSMILE |
+| Audio | LLD | egeMaps | egemaps | OpenSMILE |
+| Audio | BagofWords | BoAW_mfcc | boaw_mfcc | OpenXBOW |
+| Audio | BagofWords | BoAW_egemaps | boaw_egemaps| OpenXBOW |
+| Audio | Deep | audio_densenet | audio_densenet | DeepSpectrum |
+| Audio | Deep | audio_vgg | audo_vgg | DeepSpectrum |
+| Video | LLD | Pose_Gaze_FAUs | pose_gaze_faus | *from DAIC-WOZ of baseline 2017* |
+| Video | BagofWords | BoVW_Pose_Gaze_FAUs | bovw_pose_gaze_faus | OpenXBOW|
+| Video | Deep | CNN_Resnet | cnn_resnet | DeepSpectrum |
+| Video | Deep | CNN_VGG | cnn_vgg | DeepSpectrum |
+| Audio | Compound | covarep | *exp2_audio_fea* | *from DAIC-WOZ of baseline 2017* |
+| Video | Compound | face_feature | *exp1_face_fea* | *from DAIC-WOZ of baseline 2017*  |
+| Video | Compound | head_feature | *exp1_head_fea* | *from DAIC-WOZ of baseline 2017* |
 
 Note: The *Compund* type feature are mainly reffered to the paper [1]. LLD, Deep and BoAW/BoVW are mainly reffered to the AVEC-2019 Baselines.
 

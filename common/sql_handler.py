@@ -46,12 +46,10 @@ class SqlHandler:
         self.conn.close()
         return
 
-    def df_to_db(self, data_frame, table):
-        try:
-            self.execute(f'drop table {table};')
-        except:
-            pass
-        data_frame.to_sql(table, self.engine, index=False)
+    def df_to_db(self, data_frame, table, if_exists):
+        """if_exists: 'append' or 'replace'
+        """
+        data_frame.to_sql(table, self.engine, index=False, if_exists=if_exists)
         logger.info('stored into ' + table)
 
     def get_df(self, table):
