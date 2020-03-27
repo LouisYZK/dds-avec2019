@@ -17,5 +17,8 @@ class FeatureExtration():
         elif self.feature_name == 'egemaps':
             from core.feature_exraction.baseline19.LLDs import audio_llds
             audio_llds.get_audio_llds('egemaps')
+        elif self.feature_name == 'pose_gaze_faus':
+            from core.feature_exraction.baseline19.LLDs import video_llds
+            video_llds.get_video_llds()
         else:
             print(self.feature_name, 'not finished yet!')

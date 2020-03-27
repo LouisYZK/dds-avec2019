@@ -31,6 +31,7 @@ def extract_audio(sample, prefix, opensmile_options, outputoption, feature_type)
         db_handler.df_to_db(df, config.tbl_mfcc, if_exists='append')
     elif feature_type == 'egemaps':
         db_handler.df_to_db(df, config.tbl_egemaps, if_exists='append')
+    db_handler.disconnect()
     os.remove(outfilename)
     return sample, feature_type
     
