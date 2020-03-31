@@ -39,6 +39,9 @@ elif args.mode == 'train':
         model = args.model
         logger.info(f'[Training] You are using model {model} via feature table {fea_tables}')
         training = Train()
-    
+elif args.mode == 'database':
+    from common.sql_handler import SqlHandler
+    sql_handler = SqlHandler()
+    sql_handler.print_tables()  
 else:
     logger.info('training model not finished yet!')

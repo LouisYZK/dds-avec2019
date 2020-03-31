@@ -52,8 +52,15 @@ class SqlHandler:
         data_frame.to_sql(table, self.engine, index=False, if_exists=if_exists)
         logger.info('stored into ' + table)
 
-    def get_df(self, table):
-        return pd.read_sql(table, self.engine)
+    def get_df(self, table=None, sql=None):
+        if table is not None:
+            logger.info(f"[SqlHandler]: get from table {table}")
+            return pd.read_sql(table, self.engine)
+        elif sql is not None:
+            logger.info(f"[SqlHandler]: sql {sql}")
+            return pd.read_sql(sql, self.engine)
+        else:
+            raise ValueError
 
     def get_cloumns_from_table(self, table):
         if type(table) == str:
@@ -72,4 +79,10 @@ class SqlHandler:
                     text_fea += cols
                 else:
                     raise ValueError
-            
+    def print_tables(self):
+        tables = self.query("select name from sqlite_master where type='table';")
+        for t in tables:
+            sql = f"select * from sqlite_master where type='table' and name='{t[0]}'"
+            res = self.query(sql)
+            for item in res[0]:
+                print(item)

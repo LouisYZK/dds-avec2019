@@ -31,3 +31,6 @@ tbl_cnn_vgg = cnn_vgg
 [opensmile]
 exe_opensmile = /home/yzk/opensmile-2.3.0/bin/linux_x64_standalone_static/SMILExtract
 path_config = /home/yzk/opensmile-2.3.0/config
+
+[openxbow]
+jar_path = /home/yzk/openXBOW.jar

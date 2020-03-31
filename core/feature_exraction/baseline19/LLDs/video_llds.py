@@ -16,8 +16,11 @@ def gather_video_llds(sample_id):
     """
     dfs = []
     for feature_type in ['pose', 'gaze', 'au']:
-        file_dir = f'{config.sample_dir}/{sample_id}_P/{sample_id}_{SUFFIX[feature_type]}'
-        dfs.append(pd.read_csv(file_dir))
+        try:
+            file_dir = f'{config.sample_dir}/{sample_id}_P/{sample_id}_{SUFFIX[feature_type]}'
+            dfs.append(pd.read_csv(file_dir))
+        except:
+            return
     df = pd.concat(dfs, axis=1)
     sql_handler = SqlHandler()
     sql_handler.df_to_db(df, config.tbl_pose_gaze_faus, if_exists='append')

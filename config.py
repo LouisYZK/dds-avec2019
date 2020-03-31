@@ -40,6 +40,9 @@ tbl_cnn_vgg = None
 opensmile_exe = None
 opensmile_config_path = None
 
+#oepnxbow
+jar_path = None
+
 def init():
     global trainable
     global data_dir, sample_dir
@@ -48,6 +51,7 @@ def init():
     global db_path, tbl_develop_set, tbl_training_set, tbl_test_set, tbl_exp2_audio_fea, tbl_mfcc, tbl_egemaps, tbl_boaw_mfcc, tbl_boaw_egemaps, tbl_audio_densenet, tbl_audio_vgg, tbl_pose_gaze_faus, tbl_bovw_pose_gaze_faus, tbl_cnn_restnet, tbl_cnn_vgg
     global tbl_exp1_face_fea, tbl_exp1_head_fea
     global opensmile_config_path, opensmile_exe
+    global jar_path
     logger = log_handler.get_logger()
     
     config.read(conf_file)
@@ -77,6 +81,8 @@ def init():
 
     opensmile_exe = config.get('opensmile', 'exe_opensmile')
     opensmile_config_path = config.get('opensmile', 'path_config')
+
+    jar_path = config.get('openxbow', 'jar_path')
 
     logger.info('Init!..')
 
