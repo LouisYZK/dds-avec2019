@@ -9,7 +9,7 @@ sample_dir = /home/yzk/depression/data/avec
 tbl_exp01 = feature_exp01
 
 [database]
-db_path = /home/yzk/data/avec.db
+db_path = /home/yzk/data/avec.db 
 tbl_training_set = train
 tbl_develop_set = develop
 tbl_test_set = test
@@ -27,6 +27,12 @@ tbl_bovw_pose_gaze_faus = bovw_pose_gaze_faus
 tbl_cnn_resnet = cnn_resnet
 tbl_cnn_vgg = cnn_vgg
 
+[mysql]
+username = root
+host = 127.0.0.1
+port = 3306
+password = 750750750
+db = avec
 
 [opensmile]
 exe_opensmile = /home/yzk/opensmile-2.3.0/bin/linux_x64_standalone_static/SMILExtract

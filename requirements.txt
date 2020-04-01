@@ -1,4 +1,5 @@
 sqlalchemy
+pymysql
 numpy
 pandas
 matplotlib

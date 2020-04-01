@@ -36,6 +36,13 @@ tbl_bovw_pose_gaze_faus = None
 tbl_cnn_restnet = None
 tbl_cnn_vgg = None
 
+# mysql
+mysql_username = None
+mysql_host = None
+mysql_port = None
+mysql_password = None
+mysql_db = None
+
 # opensmile
 opensmile_exe = None
 opensmile_config_path = None
@@ -49,6 +56,7 @@ def init():
     global logger
     global feature_exp01
     global db_path, tbl_develop_set, tbl_training_set, tbl_test_set, tbl_exp2_audio_fea, tbl_mfcc, tbl_egemaps, tbl_boaw_mfcc, tbl_boaw_egemaps, tbl_audio_densenet, tbl_audio_vgg, tbl_pose_gaze_faus, tbl_bovw_pose_gaze_faus, tbl_cnn_restnet, tbl_cnn_vgg
+    global mysql_username, mysql_host, mysql_port, mysql_password , mysql_db
     global tbl_exp1_face_fea, tbl_exp1_head_fea
     global opensmile_config_path, opensmile_exe
     global jar_path
@@ -78,6 +86,12 @@ def init():
     tbl_bovw_pose_gaze_faus = config.get('database', 'tbl_bovw_pose_gaze_faus')
     tbl_cnn_restnet = config.get('database', 'tbl_cnn_resnet')
     tbl_cnn_vgg = config.get('database', 'tbl_cnn_vgg')
+
+    mysql_username = config.get('mysql', 'username')
+    mysql_host = config.get('mysql', 'host')
+    mysql_port = config.get('mysql', 'port')
+    mysql_password = config.get('mysql', 'password')
+    mysql_db = config.get('mysql', 'db')
 
     opensmile_exe = config.get('opensmile', 'exe_opensmile')
     opensmile_config_path = config.get('opensmile', 'path_config')

@@ -7,21 +7,29 @@ from common.log_handler import get_logger
 import config
 from global_values import *
 config.init()
-
 logger = get_logger()
 
 class SqlHandler:
-    def __init__(self, timeout=None):
-        if timeout is not None:
-            self.conn = sqlite.connect(config.db_path, timeout=timeout)
+    def __init__(self, type='sqlite'):
+        if type == 'mysql':
+            logger.info("[SqlHandler Mysql init...]")
+            addr = f'mysql+pymysql://{config.mysql_username}:{config.mysql_password}@{config.mysql_host}:{config.mysql_port}/{config.mysql_db}'
+            self.engine = create_engine(addr, pool_size=20
+                                        max_overflow=0,
+                                        pool_timeout=30,
+                                        pool_recyle=-1)
+            self.conn = self.engine.raw_connection()
         else:
+            logger.info("[SqlHandler Sqlite init...]")
             self.conn = sqlite3.connect(config.db_path)
-        self.engine = create_engine(f'sqlite:///{config.db_path}',
-                                    poolclass=SingletonThreadPool,
-                                    connect_args={'check_same_thread': True})
+            self.engine = create_engine(f'sqlite:///{config.db_path}',
+                                        poolclass=SingletonThreadPool,
+                                        connect_args={'check_same_thread': True})
     
     def execute(self, sql):
+        print(sql)
         try:
+            logger.info(f"[SqlHandler]: execute {sql}")
             cur = self.conn.cursor()
             cur.execute(sql)
             res = None
@@ -35,6 +43,7 @@ class SqlHandler:
 
     def query(self, sql):
         try:
+            logger.info(f"[SqlHandler]: execute {sql}")
             cur = self.conn.cursor()
             cur.execute(sql)
             res = cur.fetchall()
@@ -55,6 +64,7 @@ class SqlHandler:
     def df_to_db(self, data_frame, table, if_exists):
         """if_exists: 'append' or 'replace'
         """
+        logger.info(f"[SqlHandler]: store df to table {table}")
         data_frame.to_sql(table, self.engine, index=False, if_exists=if_exists)
         logger.info('stored into ' + table)
 
