@@ -27,6 +27,10 @@ def extract_audio(sample, prefix, opensmile_options, outputoption, feature_type)
     else:
         return sample, feature_type
     db_handler = SqlHandler()
+    def name_handler(x):
+        x['name'] = int(x['name'][1:4])
+        return x
+    df = df.apply(name_handler, axis=1)
     if feature_type == 'mfcc':
         db_handler.df_to_db(df, config.tbl_mfcc, if_exists='append')
     elif feature_type == 'egemaps':
@@ -50,8 +54,8 @@ def get_audio_llds(feature_type):
     with ThreadPoolExecutor(max_workers=20) as executor:
         tasks = []
         for sample, prefix in zip(IDS, PREFIX):
-            tasks.append(executor.submit(extract_audio(sample, prefix, opensmile_options, 
-                                       outputoption, feature_type)))
+            tasks.append(executor.submit(extract_audio, sample, prefix, opensmile_options, 
+                                       outputoption, feature_type))
         for future in as_completed(tasks):
             try:
                 res_sample, res_type = future.result()

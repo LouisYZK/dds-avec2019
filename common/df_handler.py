@@ -42,8 +42,8 @@ def get_data_by_id(feature_table, gender=False):
     else:
         train_male = train[train['Gender'] == 1]
         train_female = train[train['Gender'] == 0]
-        dev_male = train[train['Gender'] == 1]
-        dev_female = train[train['Gender'] == 0]
+        dev_male = dev[dev['Gender'] == 1]
+        dev_female = dev[dev['Gender'] == 0]
         
         train_male = merge_df_by_id(train_male, feature)
         train_female = merge_df_by_id(train_female, feature)
@@ -83,8 +83,8 @@ def get_data_multi_modality(tables, gender=False):
     else:
         train_male = train[train['Gender'] == 1]
         train_female = train[train['Gender'] == 0]
-        dev_male = train[train['Gender'] == 1]
-        dev_female = train[train['Gender'] == 0]
+        dev_male = dev[dev['Gender'] == 1]
+        dev_female = dev[dev['Gender'] == 0]
 
         data_dct = {
             'male': {

@@ -95,8 +95,11 @@ python3 start.py --mode train --model rf --feature exp2
 
 
 ## 数据库
-
-太多了不想写，使用的sqlite, 有空了导出个sql
+All features data are stored in sqlite.db, you can run:
+```bash
+python start.py --mode database 
+```
+to show all tables and their frustructure.
 
 ## TODO
 

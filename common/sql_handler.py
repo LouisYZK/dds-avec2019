@@ -2,6 +2,7 @@ import sqlite3
 import traceback
 import pandas as pd
 from sqlalchemy import create_engine, MetaData
+from sqlalchemy.pool import SingletonThreadPool
 from common.log_handler import get_logger
 import config
 from global_values import *
@@ -10,9 +11,14 @@ config.init()
 logger = get_logger()
 
 class SqlHandler:
-    def __init__(self):
-        self.conn = sqlite3.connect(config.db_path)
-        self.engine = create_engine(f'sqlite:///{config.db_path}')
+    def __init__(self, timeout=None):
+        if timeout is not None:
+            self.conn = sqlite.connect(config.db_path, timeout=timeout)
+        else:
+            self.conn = sqlite3.connect(config.db_path)
+        self.engine = create_engine(f'sqlite:///{config.db_path}',
+                                    poolclass=SingletonThreadPool,
+                                    connect_args={'check_same_thread': True})
     
     def execute(self, sql):
         try:
@@ -52,13 +58,15 @@ class SqlHandler:
         data_frame.to_sql(table, self.engine, index=False, if_exists=if_exists)
         logger.info('stored into ' + table)
 
-    def get_df(self, table=None, sql=None):
+    def get_df(self, table=None, sql=None, chunksize=None):
+        """chunksize: support to return a iterator
+        """
         if table is not None:
             logger.info(f"[SqlHandler]: get from table {table}")
-            return pd.read_sql(table, self.engine)
+            return pd.read_sql(table, self.engine, chunksize=chunksize)
         elif sql is not None:
             logger.info(f"[SqlHandler]: sql {sql}")
-            return pd.read_sql(sql, self.engine)
+            return pd.read_sql(sql, self.engine, chunksize=chunksize)
         else:
             raise ValueError
 
@@ -86,3 +94,4 @@ class SqlHandler:
             res = self.query(sql)
             for item in res[0]:
                 print(item)
+

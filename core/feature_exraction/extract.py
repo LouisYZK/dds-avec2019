@@ -28,6 +28,6 @@ class FeatureExtration():
             bow.gen_bow('audio', 'egemaps')
         elif self.feature_name == 'bovw_pose_gaze_faus':
             from core.feature_exraction.baseline19.BagOfWords import bow
-            bow.gen_bow('video', 'bovw_pose_gaze_faus')
+            bow.gen_bow('video', 'pose_gaze_faus')
         else:
             print(self.feature_name, 'not finished yet!')
