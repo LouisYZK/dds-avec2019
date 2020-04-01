@@ -4,7 +4,7 @@ Extract aduio Low-Level Descriptors via OpenSMILE.
 import config
 import os
 import pandas as pd
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from common.log_handler import get_logger
 from common.sql_handler import SqlHandler
 from global_values import *
@@ -13,7 +13,10 @@ logger = get_logger()
 # feature_type = 'egemaps'
 # feature_type = 'mfcc'
 
-def extract_audio(sample, prefix, opensmile_options, outputoption, feature_type):
+def extract_audio(sample, prefix, 
+                  opensmile_options, 
+                  outputoption, 
+                  feature_type):
     """Dispatch extraction tasks
     sample: phq-id like 310
     prefix: phq file prefix like 310_
@@ -26,7 +29,7 @@ def extract_audio(sample, prefix, opensmile_options, outputoption, feature_type)
     if os.path.exists(outfilename): df = pd.read_csv(outfilename, sep=';')
     else:
         return sample, feature_type
-    db_handler = SqlHandler()
+    db_handler = SqlHandler(config.db_type)
     def name_handler(x):
         x['name'] = int(x['name'][1:4])
         return x
@@ -51,7 +54,7 @@ def get_audio_llds(feature_type):
         outputoption = '-lldcsvoutput' 
     else:
         logger.info('Error: Feature Type' + feature_type)
-    with ThreadPoolExecutor(max_workers=20) as executor:
+    with ProcessPoolExecutor(max_workers=20) as executor:
         tasks = []
         for sample, prefix in zip(IDS, PREFIX):
             tasks.append(executor.submit(extract_audio, sample, prefix, opensmile_options, 

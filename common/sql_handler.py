@@ -14,10 +14,9 @@ class SqlHandler:
         if type == 'mysql':
             logger.info("[SqlHandler Mysql init...]")
             addr = f'mysql+pymysql://{config.mysql_username}:{config.mysql_password}@{config.mysql_host}:{config.mysql_port}/{config.mysql_db}'
-            self.engine = create_engine(addr, pool_size=20
+            self.engine = create_engine(addr, pool_size=20,
                                         max_overflow=0,
-                                        pool_timeout=30,
-                                        pool_recyle=-1)
+                                        pool_timeout=30)
             self.conn = self.engine.raw_connection()
         else:
             logger.info("[SqlHandler Sqlite init...]")

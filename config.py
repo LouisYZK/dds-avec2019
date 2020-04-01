@@ -7,7 +7,7 @@ BASE_DIR = '/home/yzk/dds-avec2019/'
 conf_file = BASE_DIR + 'config/config.ini.model'
 config = configparser.ConfigParser()
 
-
+db_type = 'sqlite'
 trainable = None
 data_dir = None
 sample_dir = None
@@ -52,7 +52,7 @@ jar_path = None
 
 def init():
     global trainable
-    global data_dir, sample_dir
+    global data_dir, sample_dir, db_type
     global logger
     global feature_exp01
     global db_path, tbl_develop_set, tbl_training_set, tbl_test_set, tbl_exp2_audio_fea, tbl_mfcc, tbl_egemaps, tbl_boaw_mfcc, tbl_boaw_egemaps, tbl_audio_densenet, tbl_audio_vgg, tbl_pose_gaze_faus, tbl_bovw_pose_gaze_faus, tbl_cnn_restnet, tbl_cnn_vgg

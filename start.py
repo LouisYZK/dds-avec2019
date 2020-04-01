@@ -16,8 +16,12 @@ parser.add_argument('--feature_tables', help='choose the feature to train using 
                     type=list)
 parser.add_argument('--model', help='choose which predictor to train')
 parser.add_argument('--gender', help='wether consider gender or not')
+parser.add_argument('--db', help='choose which database version you use, sqlite or mysql')
 
 args = parser.parse_args()
+
+if args.db is not None:
+    config.db_type = args.db
 
 if args.mode == 'extract':
     # fea_ext = extract.FeatureExtration(model=args.feature)
