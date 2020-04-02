@@ -9,15 +9,14 @@ import traceback
 import pandas as pd
 import config
 import numpy as np
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from common.sql_handler import SqlHandler
 from common.log_handler import get_logger
 logger = get_logger()
 
 def worker(sample_id):
-    sql = f"select * from {config.tbl_mfcc} where substr(name, 2, 3) ='{sample_id}' "
-    print('Start......', sample_id)
-    sql_handler = SqlHandler()
+    sql = f"select * from {config.tbl_mfcc} where name ={sample_id} "
+    sql_handler = SqlHandler(type=config.db_type)
     res = sql_handler.get_df(sql=sql)
     sql_handler.disconnect()
     return res
@@ -57,33 +56,25 @@ def gen_bow(modal, llds,
     # prepare llds data
     input_file = table_name + '_llds.csv'
     if not os.path.exists(input_file):
-        sql_handler = SqlHandler()
-        names = sql_handler.query("select distinct substr(name, 2,3) from %s" % table_name)
-        # sql_handler.disconnect()
-        # with ThreadPoolExecutor(max_workers=30) as executor:
-        #     sql_handler = SqlHandler()
-        #     tasks = [executor.submit(worker, name[0]) for name in names]
-        # dfs = []
-        # for future in as_completed(tasks):
-        #     print(future.result().head())
-        #     df = future.result().drop(['frameTime'], axis=1)
-        #     dfs.append(df)
+        sql_handler = SqlHandler(config.db_type)
+        names = sql_handler.query("select distinct name from %s" % table_name)
+        sql_handler.disconnect()
+        with ProcessPoolExecutor(max_workers=19) as executor:
+            tasks = [executor.submit(worker, name[0]) for name in names]
         dfs = []
-        def name_process(x):
-            return int(x['name'][1:4])
-        for name in names:
+        # for name in names:
+        #     df = worker(name[0])
+        #     df = df.drop(['frameTime'], axis=1)
+        #     dfs.append(df)
+        for future in as_completed(tasks):
             try:
-                sql = f"select * from {table_name} where substr(name, 2, 3) ='{name[0]}' "
-                df = sql_handler.get_df(sql=sql).drop(['frameTime'], axis=1)
-                df['name'] = df.apply(name_process, axis=1)
+                df = future.result().drop(['frameTime'], axis=1)
                 dfs.append(df)
-            except Exception as e:
+            except Exception:
                 traceback.print_exc()
-                import sys
-                sys.exit()
                 continue
-        mfcc_df = pd.concat(dfs, axis=0)  # stack by row
-        mfcc_df.to_csv(input_file, header=None, sep=';')
+        llds_df = pd.concat(dfs, axis=0)  # stack by row
+        llds_df.to_csv(input_file, header=None, sep=';')
 
     openxbow = 'java -jar ' + config.jar_path + ' -i ' + input_file
     output_file = table_name + '_bow.csv'

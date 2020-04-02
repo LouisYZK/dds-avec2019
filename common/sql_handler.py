@@ -11,11 +11,12 @@ logger = get_logger()
 
 class SqlHandler:
     def __init__(self, type='sqlite'):
+        self.type = type
         if type == 'mysql':
             logger.info("[SqlHandler Mysql init...]")
             addr = f'mysql+pymysql://{config.mysql_username}:{config.mysql_password}@{config.mysql_host}:{config.mysql_port}/{config.mysql_db}'
             self.engine = create_engine(addr, pool_size=20,
-                                        max_overflow=0,
+                                        max_overflow=10,
                                         pool_timeout=30)
             self.conn = self.engine.raw_connection()
         else:
@@ -57,6 +58,7 @@ class SqlHandler:
     def disconnect(self):
         """Always remember to invoke disconnect
         """
+        logger.info(f'[SqlHandler {self.type}] disconnect....')
         self.conn.close()
         return
 

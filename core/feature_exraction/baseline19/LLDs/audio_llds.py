@@ -3,6 +3,7 @@ Extract aduio Low-Level Descriptors via OpenSMILE.
 """
 import config
 import os
+import traceback
 import pandas as pd
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from common.log_handler import get_logger
@@ -26,9 +27,7 @@ def extract_audio(sample, prefix,
     outfilename = f'{sample}_{feature_type}.csv'
     opensmile_call = config.opensmile_exe + ' ' + opensmile_options + ' -inputfile ' + infilename + ' ' + outputoption + ' ' + outfilename + ' -instname ' + str(sample) + ' -output ?'
     os.system(opensmile_call)
-    if os.path.exists(outfilename): df = pd.read_csv(outfilename, sep=';')
-    else:
-        return sample, feature_type
+    df = pd.read_csv(outfilename, sep=';')
     db_handler = SqlHandler(config.db_type)
     def name_handler(x):
         x['name'] = int(x['name'][1:4])
@@ -64,6 +63,7 @@ def get_audio_llds(feature_type):
                 res_sample, res_type = future.result()
                 logger.info(f'[Feature Extration: Auido LLDs] {res_sample} {res_type} ...')
             except:
+                traceback.print_exc()
                 continue
         
             
