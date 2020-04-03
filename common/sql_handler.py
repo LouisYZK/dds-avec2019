@@ -2,6 +2,7 @@ import sqlite3
 import traceback
 import pandas as pd
 from sqlalchemy import create_engine, MetaData
+from sqlalchemy.pool import NullPool
 from sqlalchemy.pool import SingletonThreadPool
 from common.log_handler import get_logger
 import config
@@ -15,9 +16,7 @@ class SqlHandler:
         if type == 'mysql':
             logger.info("[SqlHandler Mysql init...]")
             addr = f'mysql+pymysql://{config.mysql_username}:{config.mysql_password}@{config.mysql_host}:{config.mysql_port}/{config.mysql_db}'
-            self.engine = create_engine(addr, pool_size=20,
-                                        max_overflow=10,
-                                        pool_timeout=30)
+            self.engine = create_engine(addr, poolclass=NullPool)
             self.conn = self.engine.raw_connection()
         else:
             logger.info("[SqlHandler Sqlite init...]")

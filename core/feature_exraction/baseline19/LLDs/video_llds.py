@@ -22,7 +22,7 @@ def gather_video_llds(sample_id):
         except:
             return
     df = pd.concat(dfs, axis=1)
-    sql_handler = SqlHandler()
+    sql_handler = SqlHandler(config.db_type)
     sql_handler.df_to_db(df, config.tbl_pose_gaze_faus, if_exists='append')
     sql_handler.disconnect()
     logger.info(f'[Feature Extraction Video LLDs] {sample_id}')

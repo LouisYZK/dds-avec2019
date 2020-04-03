@@ -56,24 +56,31 @@ def gen_bow(modal, llds,
     # prepare llds data
     input_file = table_name + '_llds.csv'
     if not os.path.exists(input_file):
-        sql_handler = SqlHandler(config.db_type)
-        names = sql_handler.query("select distinct name from %s" % table_name)
-        sql_handler.disconnect()
-        with ProcessPoolExecutor(max_workers=19) as executor:
-            tasks = [executor.submit(worker, name[0]) for name in names]
-        dfs = []
+        # sql_handler = SqlHandler(config.db_type)
+        # names = sql_handler.query("select distinct name from %s" % table_name)
+        # sql_handler.disconnect()
+        # with ProcessPoolExecutor(max_workers=19) as executor:
+        #     tasks = [executor.submit(worker, name[0]) for name in names]
+        
+        # dfs = []
         # for name in names:
         #     df = worker(name[0])
         #     df = df.drop(['frameTime'], axis=1)
         #     dfs.append(df)
-        for future in as_completed(tasks):
-            try:
-                df = future.result().drop(['frameTime'], axis=1)
-                dfs.append(df)
-            except Exception:
-                traceback.print_exc()
-                continue
-        llds_df = pd.concat(dfs, axis=0)  # stack by row
+        # for future in as_completed(tasks):
+        #     try:
+        #         df = future.result().drop(['frameTime'], axis=1)
+        #         dfs.append(df)
+        #     except Exception:
+        #         traceback.print_exc()
+        #         continue
+        # llds_df = pd.concat(dfs, axis=0)  # stack by row
+        # llds_df.to_csv(input_file, header=None, sep=';')
+
+        sql_handler = SqlHandler(type=config.db_type)
+        llds_df = sql_handler.get_df(table_name)
+        logger.info('[LLDS BOW get data from db over...]')
+        llds_df = llds_df.drop(['frameTime'], axis=1)
         llds_df.to_csv(input_file, header=None, sep=';')
 
     openxbow = 'java -jar ' + config.jar_path + ' -i ' + input_file
