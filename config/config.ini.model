@@ -40,3 +40,15 @@ path_config = /home/yzk/opensmile-2.3.0/config
 
 [openxbow]
 jar_path = /home/yzk/openXBOW.jar
+
+[deepmodel]
+workers_num = 1
+max_sequence_num = 100
+rnn_layer_dim = 1
+hidden_layer_dim = 64
+bidrectional = False
+rnn_layer_num = 1
+dropout_rate = 0.2
+epochs_num = 30
+bacth_size = 4
+learning_rate = 0.001

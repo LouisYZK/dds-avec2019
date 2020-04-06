@@ -50,6 +50,18 @@ opensmile_config_path = None
 #oepnxbow
 jar_path = None
 
+# deepmodel
+wokers_num = None
+max_sequence_num = None
+rnn_layer_dim = None
+hidden_layer_dim = None
+bidrectional = None
+rnn_layer_num = None
+dropout_rate = None
+epochs_num = None
+bacth_size = None
+learning_rate = None
+
 def init():
     global trainable
     global data_dir, sample_dir, db_type
@@ -60,6 +72,7 @@ def init():
     global tbl_exp1_face_fea, tbl_exp1_head_fea
     global opensmile_config_path, opensmile_exe
     global jar_path
+    global wokers_num, max_sequence_num, rnn_layer_dim, hidden_layer_dim, bidrectional,rnn_layer_num, dropout_rate, epochs_num, bacth_size, learning_rate
     logger = log_handler.get_logger()
     
     config.read(conf_file)
@@ -97,6 +110,17 @@ def init():
     opensmile_config_path = config.get('opensmile', 'path_config')
 
     jar_path = config.get('openxbow', 'jar_path')
+
+    wokers_num = ast.literal_eval(config.get('deepmodel', 'workers_num'))
+    max_sequence_num = ast.literal_eval(config.get('deepmodel', 'max_sequence_num'))
+    rnn_layer_dim = ast.literal_eval(config.get('deepmodel', 'rnn_layer_dim'))
+    hidden_layer_dim = ast.literal_eval(config.get('deepmodel', 'hidden_layer_dim'))
+    bidrectional = ast.literal_eval(config.get('deepmodel', 'bidrectional'))
+    rnn_layer_num = ast.literal_eval(config.get('deepmodel', 'rnn_layer_dim'))
+    dropout_rate = ast.literal_eval(config.get('deepmodel', 'dropout_rate'))
+    epochs_num = ast.literal_eval(config.get('deepmodel', 'epochs_num'))
+    bacth_size = ast.literal_eval(config.get('deepmodel', 'bacth_size'))
+    learning_rate = ast.literal_eval(config.get('deepmodel', 'learning_rate'))
 
     logger.info('Init!..')
 
