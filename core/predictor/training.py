@@ -82,6 +82,9 @@ class Train(Process):
                     # multi_modality
                     from core.predictor.RF.rf_predict import MultiModalRandomForest
                     mmrf = MultiModalRandomForest(self.data)
-                    
+        elif self.model_name == 'deep':
+            from core.predictor.Deep import deep_train
+            # feature_name = 'mfcc' # use for test
+            deep_train.start(self.feature_name)
         else:
             print('not finish yet!')
