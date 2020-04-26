@@ -6,3 +6,7 @@
 *.out
 *.c
 *.cpp
+demo/cpp_ds/*
+*.json
+*.out
+.h
