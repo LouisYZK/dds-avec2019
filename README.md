@@ -26,7 +26,7 @@ Different features' extraction according to each model;
 | Video | Compound | face_feature | *exp1_face_fea* | *from DAIC-WOZ of baseline 2017*  |
 | Video | Compound | head_feature | *exp1_head_fea* | *from DAIC-WOZ of baseline 2017* |
 
-Note: The *Compund* type feature are mainly reffered to the paper [1]. LLD, Deep and BoAW/BoVW are mainly reffered to the AVEC-2019 Baselines.
+Note: The *Compound* type feature are mainly reffered to the paper [1]. LLD, Deep and BoAW/BoVW are mainly reffered to the AVEC-2019 Baselines.
 
 ## predictor
 
