@@ -64,9 +64,12 @@ def train_unimodal_seq(train_loader, model, optimizer):
 		
 
 
-def start(feature):
+def start(feature, device):
     train_ds = create_dataset.get_loader(feature, dataset_type='train')
-    model = UnimodalRegressorModel(feature).cuda()
+    if device == 'cuda':
+        model = UnimodalRegressorModel(feature).cuda()
+    else:
+        model = UnimodalRegressorModel(feature)
     best_ccc = -1
     optimizer = torch.optim.Adam(model.parameters(), lr=config.learning_rate)
     

@@ -1,4 +1,6 @@
 import sys
+
+from torch._C import device
 import config
 config.init()
 from global_values import *
@@ -17,6 +19,7 @@ parser.add_argument('--feature_tables', help='choose the feature to train using 
 parser.add_argument('--model', help='choose which predictor to train')
 parser.add_argument('--gender', help='wether consider gender or not')
 parser.add_argument('--db', help='choose which database version you use, sqlite or mysql')
+parser.add_argument('--device', '-d', default='cpu', help="which device")
 
 args = parser.parse_args()
 
@@ -33,11 +36,11 @@ elif args.mode == 'train':
         fea = args.feature
         model = args.model
         logger.info(f'You are training using model {model} via feature {fea}')
-        training = Train(model_name=model, feature_name=fea)
+        training = Train(model_name=model, feature_name=fea, device=args.device)
         training.start()
         if args.gender == 'y':
             logger.info(f'You are training using model {model} via feature {fea} and consider gender!')
-            Train(model_name=model, feature_name=fea, gender=True).start()
+            Train(model_name=model, feature_name=fea, gender=True, devcie=args.device).start()
     else:
         fea_tables = args.feature_tables
         model = args.model
