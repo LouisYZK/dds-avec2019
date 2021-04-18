@@ -14,7 +14,8 @@ class Train(Process):
     def __init__(self, model_name=None,
                  feature_name=None,
                  gender=False,
-                 feature_tables=None):
+                 feature_tables=None,
+                 device=None):
         """Train model Controller, dispatch the training tasks;
         Input:
             model_name: certain model depend on papers
@@ -34,6 +35,7 @@ class Train(Process):
         self.feature_name = feature_name
         self.feature_tables = feature_tables
         self.gender = gender
+        self.device = device
         self.sql_handler = SqlHandler()
         self._set_feature()
 
@@ -85,6 +87,6 @@ class Train(Process):
         elif self.model_name == 'deep':
             from core.predictor.Deep import deep_train
             # feature_name = 'mfcc' # use for test
-            deep_train.start(self.feature_name)
+            deep_train.start(self.feature_name, device=self.device)
         else:
             print('not finish yet!')
