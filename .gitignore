@@ -10,3 +10,6 @@ demo/cpp_ds/*
 *.json
 *.out
 .h
+venv
+dds
+demo
